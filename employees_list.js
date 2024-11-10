@@ -1,16 +1,20 @@
 const mongoose = require ('mongoose');
 const Employees = require('./employee');
 const express = require('express');
+const cors = require('cors')
 const bodyParser = require('body-parser');
 const app = express();
 const port = 3000;
 
 // connect with MongoDB
-const uri = ('mongodb://localhost:27017')
+const uri = ('mongodb://127.0.0.1:27017')
 mongoose.connect(uri, {'dbName':'employeeDB'})
 
 // Setup Middleware
 app.use('*', bodyParser.json());
+
+// Enable CORS for all routes
+app.use(cors());
 
 // GET endpoint
 app.get('/api/employees', async(req, res)=>{
